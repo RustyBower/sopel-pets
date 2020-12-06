@@ -1,0 +1,22 @@
+language: python
+python:
+- '3.5'
+- '3.6'
+- '3.7'
+- '3.8'
+before_install:
+- pip install git+https://github.com/sopel-irc/sopel.git
+install:
+- pip install -e .
+- pip install pycodestyle
+script:
+- pycodestyle --show-source --ignore=E501,E402,E722  ./
+deploy:
+  provider: pypi
+  user: rustybower
+  password:
+    secure: SF6dLWopT5XIMPWkNSHAlLOk0eP+mzc7n4rJZBPgTMIvbU9nyg7MRcq9pUOR9dKf6s9WMxLilxPCqhLYPhS7zRXyJbN7JpuDYIobA4F/ViGgMosgq5DQaJCiCilTDfP5M2L31zAdsAWB7J9CQKdoyUeOfy/YNbEmQ1Eb/fTEqu+VvqwjbO7YG0IQnN3Olx0d1zE5/5XvK1XCC+UJc/CIv9vqf94pOJ5r/b/ASa74sncJWp4LX1FrCXnDFxVqy3Esxyw9ZOWIq14gWJmBaIUt70uce21QNS8OUc3Z4WLbbKlHokeTFTZDuGHe/EA0sO2uQDjd9eUsQq9I4qttrql1eQB3CXIUoGrxXLW1vlBWLAWFrTD2X4FEZ8TgmuAecRvZhCgvCCsSmJmcQHSY/W2EeJioer57qWUq47fFI6OOPgOBqU1kQq5yvj1pUhftiWEFqss5EbHjfdmILV6U80ggtQxb1QWjUS8feG+zFMTvgUSXw0RSakwBQufa9/oIrlYfjmx006qtRfeE7oAxuKBz78bpELiwCZjIUhkGg/WrhFYAVI/eWA7Pwtu8XSk3ksIbQd2mYITlRd24goTE3IQLNG/Q1phxVE35dvF5Bz7nqNlW8htcaqJa/wySsaAajg1NKAj1tkBLjD1/IyRGp8CTRkVJIqX8pTJwnO7kDl4Ss9o=
+  on:
+    tags: true
+    python: '3.5'
+  skip_existing: true
