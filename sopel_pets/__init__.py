@@ -47,7 +47,6 @@ class Pets:
         session = bot.db.session()
         # Return False if quote already exists
         if Pets.search(bot, url):
-            print('Already Exists')
             return False
         new_pet = PetsDB(url=url, type=pettype)
         session.add(new_pet)
@@ -59,7 +58,7 @@ class Pets:
     def delete(bot, url):
         session = bot.db.session()
         # Return False if quote DNE
-        if Pets.search(bot, url):
+        if not Pets.search(bot, url):
             return False
         session.query(PetsDB).filter(PetsDB.url == url).delete()
         session.commit()
@@ -119,7 +118,7 @@ def pets(bot, trigger, pettype):
     elif args[0].casefold() == 'delete'.casefold():
         if not Pets.delete(bot, args[1]):  # args[1] should be the URL
             return bot.say('ERROR: URL Does Not Exist')
-        return bot.say('{0}  Deleted'.format(pettype))
+        return bot.say('{0} deleted'.format(pettype))
 
     # Otherwise, invalid argument specified
     else:
