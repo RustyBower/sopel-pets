@@ -45,7 +45,7 @@ class Pets:
     @staticmethod
     def add(bot, url, pettype):
         session = bot.db.session()
-        # Return False if quote already exists
+        # Return False if pet already exists
         if Pets.search(bot, url):
             return False
         new_pet = PetsDB(url=url, type=pettype)
@@ -57,7 +57,7 @@ class Pets:
     @staticmethod
     def delete(bot, url):
         session = bot.db.session()
-        # Return False if quote DNE
+        # Return False if pet DNE
         if not Pets.search(bot, url):
             return False
         session.query(PetsDB).filter(PetsDB.url == url).delete()
